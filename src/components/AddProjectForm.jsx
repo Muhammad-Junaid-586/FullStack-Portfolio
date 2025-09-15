@@ -75,7 +75,7 @@ export default function AddProjectForm({ onProjectAdded , clickTriger }) {
 
             <h2 className="text-xl font-semibold mb-4">Add New Project</h2>
 
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-4 z-50">
               <div>
                 <label className="block mb-1 font-medium">Title</label>
                 <input

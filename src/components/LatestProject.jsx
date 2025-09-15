@@ -5,11 +5,12 @@ import Link from "next/link";
 import { useUser } from "@clerk/nextjs";
 import DeleteProject from "./admin/DeleteProject";
 import EditProject from "./admin/EditProject";
-import { FaEdit } from "react-icons/fa";
-import AddProjectForm from "./AddProjectForm";
+import { FaEdit, FaPlusCircle } from "react-icons/fa";
+// import AddProjectForm from "./AddProjectForm";
 import { useSelector } from "react-redux";
 import Aos from "aos";
 import "aos/dist/aos.css";
+import AddProjectForm from "./admin/AddProjectFormAdmin";
 
 const categoryMap = {
   All: "All",
@@ -142,27 +143,30 @@ const LatestProjects = () => {
       <div className="border-t-4 border-blue-500 w-24 mx-auto mb-8"></div>
 
     {isAdmin && <div className="flex justify-center"  data-aos="zoom-out-right">
-      {isAdmin && <AddProjectForm onProjectAdded={fetchProjects} /> }
+     <Link href="/dashboard/projects/add-project" className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 cursor-pointer"> <FaPlusCircle/></Link>
      </div>
 }
 
      
 
       <div className="flex justify-center flex-wrap gap-3 my-8">
-        {Object.keys(categoryMap).map((cat) => (
-          <button   data-aos="zoom-in"  data-aos-delay={cat * 300}
-            key={cat}
-            onClick={() => setActive(cat)}
-            className={`px-2 md:px-5 py-2 rounded-full border transition-all duration-300   md:font-medium ${
-              active === cat
-                ? "bg-blue-500 hover:bg-blue-600 text-white shadow-lg border-transparent scale-105"
-                : "bg-white text-gray-700 border-gray-200 hover:bg-gray-50 hover:shadow-md"
-            }`}
-          >
-            {categoryMap[cat]}
-          </button>
-        ))}
-      </div>
+  {Object.keys(categoryMap).map((cat, index) => (
+    <button
+      key={cat}
+      onClick={() => setActive(cat)}
+      // data-aos="zoom-in"
+      // data-aos-delay={index * 300} // ✅ numeric delay instead of NaN
+      className={`px-2 md:px-5 py-2 rounded-full border transition-all duration-300 md:font-medium ${
+        active === cat
+          ? "bg-blue-500 hover:bg-blue-600 text-white shadow-lg border-transparent scale-105"
+          : "bg-white text-gray-700 border-gray-200 hover:bg-gray-50 hover:shadow-md"
+      }`}
+    >
+      {categoryMap[cat]}
+    </button>
+  ))}
+</div>
+
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10" data-aos="zoom-in-down">
         {filteredProjects.length > 0 ? (

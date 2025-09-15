@@ -6,7 +6,7 @@ import Footer from "@/components/Footer";
 
 export default function ClientWrapper({ children }) {
   const pathname = usePathname();
-  const isDashboard = pathname.startsWith("/admin");
+  const isDashboard = pathname.startsWith("/dashboard");
 
   return (
     <>
